@@ -23,4 +23,4 @@ CREATE TABLE `agendamentos` (
 
 ALTER TABLE `animais` ADD FOREIGN KEY (`proprietario_id`) REFERENCES `proprietarios` (`id`);
 
-ALTER TABLE `agendamentos` ADD FOREIGN KEY (`animal_id`) REFERENCES `animais` (`id`);
+ALTER TABLE `agendamentos` ADD FOREIGN KEY (`animal_id`) REFERENCES `animais` (`id`)
