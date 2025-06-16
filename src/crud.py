@@ -1,45 +1,32 @@
-import mysql.connector
+import mysql.connector  
 
-def conectar():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="castracao_animal"
-    )
+def conectar():  
+    try:  
+        return mysql.connector.connect(  
+            host="localhost",  
+            user="root",  
+            password="",  
+            database="castracao_animal"  
+        )  
+    except Exception as e:  
+        print(f"Erro ao conectar: {e}")  
+        return None  
 
-def menu():
-    print("\n--- MENU ---")
-    print("1. Cadastrar animal")
-    print("2. Listar animais")
-    print("3. Sair")
+def criar_tabelas():  
+    conn = conectar()  
+    if conn:  
+        cursor = conn.cursor()  
+        cursor.execute("""  
+            CREATE TABLE IF NOT EXISTS animais (  
+                id INT AUTO_INCREMENT PRIMARY KEY,  
+                nome VARCHAR(100) NOT NULL,  
+                idade INT  
+            )  
+        """)  
+        conn.commit()  
+        print("✅ Tabelas criadas!")  
+        cursor.close()  
+        conn.close()  
 
-def cadastrar_animal():
-    conexao = conectar()
-    cursor = conexao.cursor()
-    nome = input("Nome do animal: ")
-    idade = int(input("Idade: "))
-    cursor.execute("INSERT INTO animais (nome, idade) VALUES (%s, %s)", (nome, idade))
-    conexao.commit()
-    print("✅ Animal cadastrado!")
-    cursor.close()
-    conexao.close()
-
-def listar_animais():
-    conexao = conectar()
-    cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM animais")
-    for (id, nome, idade) in cursor:
-        print(f"ID: {id}, Nome: {nome}, Idade: {idade}")
-    cursor.close()
-    conexao.close()
-
-while True:
-    menu()
-    opcao = input("Escolha: ")
-    if opcao == "1":
-        cadastrar_animal()
-    elif opcao == "2":
-        listar_animais()
-    else:
-        break
+if __name__ == "__main__":  
+    criar_tabelas()  
