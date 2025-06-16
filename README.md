@@ -4,4 +4,4 @@ Sistema de gestão para campanhas de castração popular.
 - [Relatório de Requisitos](/docs/relatorio.md)  
 - [Diagramas](/docs/)  
 ## Modelo do Banco de Dados  
-![Diagrama do Banco](/docs/diagramas/diagrama_banco.png)  
+![Diagrama do Banco](docs/diagramas/cadastro-campanha.png)  
